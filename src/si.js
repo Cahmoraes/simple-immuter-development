@@ -1,4 +1,13 @@
 export const si = (() => {
+
+  const errors = new Map([
+    [1, "This object has been frozen and should not be mutated"]
+  ])
+
+  const die = (errorNumber) => {
+    console.log(errors.get(errorNumber))
+  }
+
   const typeCheck = (elementToCheck) => {
     const stringType = Object.prototype.toString.call(elementToCheck)
     return stringType.substring(
@@ -10,21 +19,35 @@ export const si = (() => {
   const isPrimitive = (elementToCheck) => elementToCheck !== Object(elementToCheck)
 
   const freezeDeep = (elementToFreeze) => {
-    if (typeCheck(elementToFreeze) === 'object') {
-      return Object.freeze(Object.fromEntries(
-        Object.keys(elementToFreeze).map(key => {
-          return ([key, freezeDeep(elementToFreeze[key])])
+    switch(typeCheck(elementToFreeze)) {
+      case 'object':
+        return Object.freeze(Object.fromEntries(
+          Object.keys(elementToFreeze).map(key => {
+            return ([key, freezeDeep(elementToFreeze[key])])
+          })
+        ))
+      case 'array':
+        return Object.freeze(elementToFreeze.map(freezeDeep))
+      case 'set':
+        elementToFreeze.add = function () { die(1) }
+        elementToFreeze.delete = function () { die(1) }
+        elementToFreeze.clear = function () { die(1) }
+        return elementToFreeze
+      case 'map':
+        const freezedMap = new Map()
+        elementToFreeze.forEach((value, key) => {
+          freezedMap.set(key, freezeDeep(value))
         })
-      ))
-    } else if (typeCheck(elementToFreeze) === 'array') {
-      return Object.freeze(elementToFreeze.map(freezeDeep))
-    } else {
-      return elementToFreeze
+        freezedMap.set = function () { die(1) }
+        freezedMap.remove = function () { die(1) }
+        return freezedMap
+      default:
+        return elementToFreeze
     }
   }
 
-  const produce = (target, callback) => {
-    const cloned = cloneDeep(target)
+  const produce = (baseState, callback) => {
+    const cloned = cloneDeep(baseState)
     if (callback === undefined) return cloned
     callback(cloned)
     return freezeDeep(cloned)

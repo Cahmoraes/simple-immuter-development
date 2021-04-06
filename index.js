@@ -39,4 +39,21 @@ const clonedObj = si.produce(obj, (draft) => {
   draft.hobbies.get('video game')[0][2].set('map', 'teste2')
 })
 log(obj.hobbies.get('video game')[0][2].get('map'))
+clonedObj.hobbies.get('video game')[0][2].set('map', 'ts')
 log(clonedObj.hobbies.get('video game')[0][2].get('map'))
+
+// log(clonedObj)
+
+// const map = new Map([
+//   ['name', 'caique']
+// ])
+
+// const nextState = si.produce(map, draftState => {
+//   draftState.set('age', 27)
+//   draftState.set('hobbies', new Map([
+//     ['livros', ['sapiens']]
+//   ]))
+// })
+
+// nextState.get('hobbies').set('n', 'd')
+// log(nextState.get('hobbies'))
