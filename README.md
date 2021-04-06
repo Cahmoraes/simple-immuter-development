@@ -28,6 +28,26 @@
   O baseState não será alterado, mas o nextState será uma nova árvore imutável que reflete todas as alterações feitas no draftState (e compartilhando estruturalmente as coisas que não foram alteradas).
 </p>
 
+<h3>produce</h3>
+<p>produce(currentState[, object | array | producer: (draftState) => void]): nextState</p>
+<ul>
+  <li>
+    <strong>currentState</strong>: Object | Array
+  </li>
+  <li>
+    <strong>object</strong>: Se for passado um objeto, currentState deverá ser um objeto. O nextState será o resultado do merge entre currentState e object. 
+  </li>
+  <li>
+    <strong>array</strong>: Se for passado um array, currentState deverá ser um array. O nextState será o resultado do merge entre currentState e array. 
+  </li>
+  <li>
+    <strong>producer</strong>: Se for passado uma função, currentState pode ser um objeto ou um array. O draftState é um clone do currentState onde será alterado dentro da função producer. O nextState será o resultado do draftState em cima do currentState.
+  </li>
+  <li>
+    Se o segundo parâmetro de produce for omitido, o nextState será um deepClone de currentState.
+  </li>
+</ul>
+
 ## :computer: Tecnologias utilizadas
 
 - [javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
