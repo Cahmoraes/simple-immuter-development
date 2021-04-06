@@ -4,9 +4,8 @@ export const si = (() => {
     [1, "This object has been frozen and should not be mutated"]
   ])
 
-  const die = (errorNumber) => {
+  const die = (errorNumber) =>
     console.log(errors.get(errorNumber))
-  }
 
   const pipe = (...fns) => (value) => 
     fns.reduce((acc, fn) => fn(acc), value)
@@ -28,7 +27,8 @@ export const si = (() => {
 
   const freeze = (object) => Object.freeze(object)
 
-  const isPrimitive = (elementToCheck) => elementToCheck !== Object(elementToCheck)
+  const isPrimitive = (elementToCheck) => 
+    elementToCheck !== Object(elementToCheck)
 
   const freezeDeep = (elementToFreeze) => {
     switch(typeCheck(elementToFreeze)) {
@@ -63,18 +63,18 @@ export const si = (() => {
     }
   }
 
-  const produce = (baseState, callback) => {
+  const produce = (baseState, producer) => {
     const cloned = cloneDeep(baseState)
-    if (typeCheck(callback) === 'undefined') {
+    if (typeCheck(producer) === 'undefined') {
       return freezeDeep(cloned)
     }
-    if (typeCheck(callback) === 'object') {
-      return freezeDeep(Object.assign(cloned, callback))
+    if (typeCheck(producer) === 'object') {
+      return freezeDeep(Object.assign(cloned, producer))
     }
-    if (typeCheck(cloned) === 'array' && typeCheck(callback) === 'array') {
-      return freezeDeep([...cloned, ...callback])
+    if (typeCheck(cloned) === 'array' && typeCheck(producer) === 'array') {
+      return freezeDeep([...cloned, ...producer])
     }
-    callback(cloned)
+    producer(cloned)
     return freezeDeep(cloned)
   }
 
