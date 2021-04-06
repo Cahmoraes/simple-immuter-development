@@ -50,7 +50,7 @@
 
 <h3>Exemplo 2</h3>
 <p>
-  Utilizando objetos criados a partir de classes e funções construtoras, os prototipos são herdados para os objetos criados a partir do produce
+  Utilizando objetos criados a partir de classes e funções construtoras, os prototipos são herdados para os objetos criados a partir do produce.
 </p>
 <img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-2.png">
 
