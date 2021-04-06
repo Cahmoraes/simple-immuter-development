@@ -1,7 +1,6 @@
 import { si } from './src/si.js'
 
 const log = (...args) => console.log(...args)
-
 class Human {
   constructor (sex) {
     this._sex = sex
@@ -11,7 +10,6 @@ class Human {
     return this._sex
   }
 }
-
 class Person extends Human {
   constructor (name, sex) {
     super(sex)
@@ -25,6 +23,14 @@ class Person extends Human {
 
 const person = new Person('caique', 'masculino')
 
-const newState = si.produce(person)
+const newState = si.produce(person, draftState => {
+  draftState._age = 27
+  draftState.getAge = function () {
+    return this._age
+  }
+})
 
-log(newState.getSex())
+log(person === newState) // false
+log(newState.getAge()) // 27
+log(newState.getName()) // caique
+log(newState.getSex()) // masculino
