@@ -40,3 +40,17 @@ const nextState = si.produce(baseState, (draftState) => {
 
 log(nextState)
 
+class Person {
+  constructor (name) {
+    this.name = name
+  }
+
+  getName() {
+    return this.name
+  }
+}
+
+const p = new Person('caique')
+
+const pImutter = si.produce(p)
+log(pImutter.getName())

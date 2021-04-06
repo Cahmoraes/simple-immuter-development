@@ -8,6 +8,16 @@ export const si = (() => {
     console.log(errors.get(errorNumber))
   }
 
+  const pipe = (...fns) => (value) => 
+    fns.reduce((acc, fn) => fn(acc), value)
+  
+  const fromEntries = (entries) => Object.fromEntries(entries)
+
+  const getKeysFromObject = (object) => Object.keys(object)
+
+  const setPrototypeOf = (prototype) => (object) =>
+    Object.setPrototypeOf(object, prototype)
+
   const typeCheck = (elementToCheck) => {
     const stringType = Object.prototype.toString.call(elementToCheck)
     return stringType.substring(
@@ -16,16 +26,22 @@ export const si = (() => {
     ).toLowerCase()
   }
 
+  const freeze = (object) => Object.freeze(object)
+
   const isPrimitive = (elementToCheck) => elementToCheck !== Object(elementToCheck)
 
   const freezeDeep = (elementToFreeze) => {
     switch(typeCheck(elementToFreeze)) {
       case 'object':
-        return Object.freeze(Object.fromEntries(
-          Object.keys(elementToFreeze).map(key => {
-            return [key, freezeDeep(elementToFreeze[key])]
-          })
-        ))
+        const proto = Object.getPrototypeOf(elementToFreeze)
+        return pipe(
+          fromEntries,
+          setPrototypeOf(proto),
+          freeze
+        )(
+          getKeysFromObject(elementToFreeze)
+            .map(key => [key, freezeDeep(elementToFreeze[key])])
+        )
       case 'array':
         return Object.freeze(elementToFreeze.map(freezeDeep))
       case 'set':
@@ -39,7 +55,8 @@ export const si = (() => {
           freezedMap.set(key, freezeDeep(value))
         })
         freezedMap.set = function () { die(1) }
-        freezedMap.remove = function () { die(1) }
+        freezedMap.delete = function () { die(1) }
+        freezedMap.clear = function () { die(1) }
         return freezedMap
       default:
         return elementToFreeze
@@ -49,13 +66,13 @@ export const si = (() => {
   const produce = (baseState, callback) => {
     const cloned = cloneDeep(baseState)
     if (typeCheck(callback) === 'undefined') {
-      return cloned
+      return freezeDeep(cloned)
     }
     if (typeCheck(callback) === 'object') {
       return freezeDeep(Object.assign(cloned, callback))
     }
     if (typeCheck(cloned) === 'array' && typeCheck(callback) === 'array') {
-      return [...cloned, ...callback]
+      return freezeDeep([...cloned, ...callback])
     }
     callback(cloned)
     return freezeDeep(cloned)
@@ -63,11 +80,16 @@ export const si = (() => {
 
   const cloneArray = (elementToClone) => elementToClone.map(cloneDeep)
 
-  const cloneObject = (elementToClone) => Object.fromEntries(
-    Object.keys(elementToClone).map(key => {
-      return [key, cloneDeep(elementToClone[key])]
-    })
-  )
+  const cloneObject = (elementToClone) => {
+    const proto = Object.getPrototypeOf(elementToClone)
+    return pipe(
+      fromEntries,
+      setPrototypeOf(proto)
+    )(
+      getKeysFromObject(elementToClone)
+      .map(key => [key, cloneDeep(elementToClone[key])])
+    )
+  }
 
   const cloneMap = (elementToClone) => {
     const clonedMap = new Map()
