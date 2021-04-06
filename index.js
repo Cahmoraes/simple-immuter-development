@@ -1,8 +1,7 @@
 import { si } from './src/si.js'
 const log  = (...args) => console.log(...args)
 
-
-const obj = {
+const baseState = {
   name: 'caique',
   address: {
     street: 'Rua x',
@@ -26,34 +25,17 @@ const obj = {
   }
 }
 
-const clonedObj = si.produce(obj, (draft) => {
-  draft.name = 'caique moraes'
-  delete draft.phone
-  draft.address.city = 'São Paulo'
-  delete draft.address.street
-  draft.siblings = [
+const nextState = si.produce(baseState, (draftState) => {
+  draftState.name = 'caique moraes'
+  delete draftState.phone
+  draftState.address.city = 'São Paulo'
+  delete draftState.address.street
+  draftState.siblings = [
     { name: 'thomas', age: 20 },
     { name: 'isabella', age: 22 },
     { name: 'igor', age: 15 }
   ]
-  draft.hobbies.get('video game')[0][2].set('map', 'teste2')
+  draftState.hobbies.get('video game')[0][2].set('map', 'teste2')
 })
-log(obj.hobbies.get('video game')[0][2].get('map'))
-clonedObj.hobbies.get('video game')[0][2].set('map', 'ts')
-log(clonedObj.hobbies.get('video game')[0][2].get('map'))
 
-// log(clonedObj)
-
-// const map = new Map([
-//   ['name', 'caique']
-// ])
-
-// const nextState = si.produce(map, draftState => {
-//   draftState.set('age', 27)
-//   draftState.set('hobbies', new Map([
-//     ['livros', ['sapiens']]
-//   ]))
-// })
-
-// nextState.get('hobbies').set('n', 'd')
-// log(nextState.get('hobbies'))
+log(nextState)

@@ -23,7 +23,7 @@ export const si = (() => {
       case 'object':
         return Object.freeze(Object.fromEntries(
           Object.keys(elementToFreeze).map(key => {
-            return ([key, freezeDeep(elementToFreeze[key])])
+            return [key, freezeDeep(elementToFreeze[key])]
           })
         ))
       case 'array':
@@ -57,7 +57,7 @@ export const si = (() => {
 
   const cloneObject = (elementToClone) => Object.fromEntries(
     Object.keys(elementToClone).map(key => {
-      return ([key, cloneDeep(elementToClone[key])])
+      return [key, cloneDeep(elementToClone[key])]
     })
   )
 
@@ -72,7 +72,7 @@ export const si = (() => {
   const cloneSet = (elementToClone) => {
     const clonedSet = new Set()
     elementToClone.forEach((value) => clonedSet.add(cloneDeep(value)))
-    return (clonedSet)
+    return clonedSet
   }
 
   const cloneDeep = (element) => {  
