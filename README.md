@@ -24,6 +24,10 @@
 <h3>Resultado</h3>
 <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/result-1.png">
 
+<p>
+  O baseState não será alterado, mas o nextState será uma nova árvore imutável que reflete todas as alterações feitas no draftState (e compartilhando estruturalmente as coisas que não foram alteradas).
+</p>
+
 ## :computer: Tecnologias utilizadas
 
 - [javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
