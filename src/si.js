@@ -48,7 +48,15 @@ export const si = (() => {
 
   const produce = (baseState, callback) => {
     const cloned = cloneDeep(baseState)
-    if (callback === undefined) return cloned
+    if (typeCheck(callback) === 'undefined') {
+      return cloned
+    }
+    if (typeCheck(callback) === 'object') {
+      return freezeDeep(Object.assign(cloned, callback))
+    }
+    if (typeCheck(cloned) === 'array' && typeCheck(callback) === 'array') {
+      return [...cloned, ...callback]
+    }
     callback(cloned)
     return freezeDeep(cloned)
   }
