@@ -1,4 +1,4 @@
-import { si } from './si.js'
+import { si } from './src/si.js'
 const log  = (...args) => console.log(...args)
 
 
