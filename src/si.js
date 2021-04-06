@@ -53,20 +53,18 @@ export const si = (() => {
   }
 
   const cloneDeep = (element) => {  
-    if (isPrimitive(element)) {
-      return element
-    }
-    else if (typeCheck(element) === 'object') {
-      return cloneObject(element)
-    } else if (typeCheck(element) === 'array') {
-      return cloneArray(element)
-    }
-    else if (typeCheck(element) === 'map') {
-      return cloneMap(element)
-    } if (typeCheck(element) === 'set') {
-      return cloneSet(element)
-    } else {
-      return element
+    if (isPrimitive(element)) return element
+    switch (typeCheck(element)) {
+      case 'object':
+        return cloneObject(element)
+      case 'array':
+        return cloneArray(element)
+      case 'map':
+        return cloneMap(element)
+      case 'set':
+        return cloneSet(element)
+      default:
+        return element
     }
   }
 
@@ -74,17 +72,3 @@ export const si = (() => {
     produce
   })
 })()
-
-const nums = [2, 3, 4, 6]
-const numClones = si.produce(nums)
-const person = {
-  name: 'caique',
-  age: 27,
-  hobbies: [
-    'livros',
-    'músicas'
-  ],
-  getName () {
-    return this.name
-  }
-}

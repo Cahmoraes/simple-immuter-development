@@ -19,7 +19,7 @@ const obj = {
     ]
   },
   hobbies: new Map([
-    ['video game', [['crash', 'carros']]]
+    ['video game', [['crash', 'carros', new Map([['map','teste']])]]]
   ]),
   getName() {
     return this.name
@@ -36,6 +36,7 @@ const clonedObj = si.produce(obj, (draft) => {
     { name: 'isabella', age: 22 },
     { name: 'igor', age: 15 }
   ]
+  draft.hobbies.get('video game')[0][2].set('map', 'teste2')
 })
-
-log(clonedObj)
+log(obj.hobbies.get('video game')[0][2].get('map'))
+log(clonedObj.hobbies.get('video game')[0][2].get('map'))
