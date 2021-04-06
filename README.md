@@ -19,7 +19,7 @@
   Inspirado na função produce da biblioteca immerJs, o simple immuter trabalha de modo semelhante.
 </p>
 <h3>Exemplo de uso</h3>
-<img style="max-width: 100%;" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-1.png">
+<img style="max-width: 400px;" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-1.png">
 
 ## :computer: Tecnologias utilizadas
 
