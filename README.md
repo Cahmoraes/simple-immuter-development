@@ -15,6 +15,10 @@
   Ao longo das últimas semanas estive estudando a fundo o desenvolvimento de uma função de cloneDeep, capaz de realizar clonagem profunda de objetos e arrays. Tendo como inspiração a função cloneDeep da biblioteca [lodash](https://lodash.com/docs/4.17.15).<br>
   Para isso precisei me aprofundar no desenvolvimento de funções recursivas, para me auxiliar em descer os níveis de profundidade dos objetos e mantendo uma fácil interpretação e manutenibilidade das funções.
 </p>
+<p>
+  Inspirado na função produce da biblioteca immerJs, o simple immuter trabalha de modo semelhante.
+  
+</p>
 
 ## :computer: Tecnologias utilizadas
 
