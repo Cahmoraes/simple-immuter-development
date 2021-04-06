@@ -5,8 +5,10 @@
 ---
 
 ## :rocket: Sobre
-
-<img style="max-width: 100%;" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/immuter-cycle.png" alt="Simple Observable">
+<figure>
+  <img style="max-width: 100%;" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/immuter-cycle.png" alt="Simple Observable">
+  <figcaption>by: Immer</figcaption>
+</figure>
 
 ## Descrição
 <p>Desenvolvimento da biblioteca Simple Immuter.</p>
