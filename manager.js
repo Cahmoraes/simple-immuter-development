@@ -51,5 +51,6 @@ const managerState = (state) => {
 
 const state = managerState(initialState)
 state.addElement({ id: 2, name: 'thomas' })
+state.removeElement(1)
 state.updateElement(1, { name: 'caique moraes 123' })
 log(state.getState())
