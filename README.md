@@ -2,10 +2,8 @@
   <a href="https://github.com/Cahmoraes/simple-immuter/blob/main/src/si.js" target="_blank">Simple Immuter</a>
 </h3>
 
----lonagem profunda de Objeto
-
-## :rocket: Sobrewidth="500"
-  <img style="max-width: 100%;" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/immuter-cycle.png" alt="Simple Observable">
+## :rocket:
+  <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/immuter-cycle.png" alt="Simple Observable">
   <p align="center">by: Immer</p>
 
 ## Descrição
@@ -75,6 +73,7 @@
   Observe que na imagem acima, a instrução de remoção: <pre>nextPeople.hobbies.set('sport', 'footbal')</pre> diretamente no nextPeople foi executada.
   Entretando, na imagem abaixo, a seta vermelha indica o resultado no terminal, informando que este objeto foi congelado e não deve ser mutado. Ou seja, as mutações devem ocorrer dentro da função producer.
   <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-result-draft-map-clone-object.png">
+  <br>
 </p>
 ## :computer: Tecnologias utilizadas
 
