@@ -2,7 +2,7 @@
   <a href="https://github.com/Cahmoraes/simple-immuter/blob/main/src/si.js" target="_blank">Simple Immuter</a>
 </h3>
 
-## :rocket:
+## :rocket: Sobre
   <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/immuter-cycle.png" alt="Simple Observable">
   <p align="center">by: Immer</p>
 
@@ -75,6 +75,7 @@
   <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-result-draft-map-clone-object.png">
   <br>
 </p>
+
 ## :computer: Tecnologias utilizadas
 
 - [javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
