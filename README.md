@@ -42,7 +42,7 @@
     <strong>producer</strong>: (opcional) Se for passado uma função, currentState pode ser um objeto ou um array. O draftState é um clone do currentState onde será alterado dentro da função producer. O nextState será o resultado do draftState em cima do currentState.
   </li>
   <li>
-    <strong>states</strong>: (opcional) o parâmetro states será tratado internamente como um array. Podendo ser um array de objetos ou um array de arrays de nível 0 de profundidade ex.:  SIM => [ 1, 2, 3] NÃO => [1, [2], 3]. Se states for um array de arrays, todos os parâmetros de produce serão mergeados e tratados como Array para gerar o Array nextState. Se states for um Array de Objetos, todo os parâmetros de produce serão mergeados e tratados como Objetos para gerar o Objeto nextState.
+    <strong>states</strong>: (opcional) o parâmetro states será tratado internamente como um Array. Podendo ser um Array de Objetos ou um Array de Arrays. Se states for um Array de Arrays, todos os parâmetros de produce serão mergeados e tratados como Array para gerar o Array nextState. Se states for um Array de Objetos, todo os parâmetros de produce serão mergeados e tratados como Objetos para gerar o Objeto nextState.
   </li>
   <li>
     Se o segundo parâmetro de produce for omitido, o nextState será um deepClone de currentState.
