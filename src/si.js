@@ -10,9 +10,23 @@ export const si = (() => {
   const pipe = (...fns) => (value) => 
     fns.reduce((acc, fn) => fn(acc), value)
   
-  const fromEntries = (entries) => Object.fromEntries(entries)
+  const createObjectfromEntries = (entries) => Object.fromEntries(entries)
 
   const getKeysFromObject = (object) => Object.keys(object)
+
+  const immuterSet = (setToImmuter) => {
+    setToImmuter.add = function () { die(1) }
+    setToImmuter.delete = function () { die(1) }
+    setToImmuter.clear = function () { die(1) }
+    return setToImmuter
+  }
+
+  const immuterMap = (mapToImmuter) => {
+    mapToImmuter.set = function () { die(1) }
+    mapToImmuter.delete = function () { die(1) }
+    mapToImmuter.clear = function () { die(1) }
+    return mapToImmuter
+  }
 
   const setPrototypeOf = (prototype) => (object) =>
     Object.setPrototypeOf(object, prototype)
@@ -35,7 +49,7 @@ export const si = (() => {
       case 'object':
         const proto = Object.getPrototypeOf(elementToFreeze)
         return pipe(
-          fromEntries,
+          createObjectfromEntries,
           setPrototypeOf(proto),
           freeze
         )(
@@ -45,19 +59,13 @@ export const si = (() => {
       case 'array':
         return Object.freeze(elementToFreeze.map(freezeDeep))
       case 'set':
-        elementToFreeze.add = function () { die(1) }
-        elementToFreeze.delete = function () { die(1) }
-        elementToFreeze.clear = function () { die(1) }
-        return elementToFreeze
+        return immuterSet(elementToFreeze)
       case 'map':
         const freezedMap = new Map()
         elementToFreeze.forEach((value, key) => {
           freezedMap.set(key, freezeDeep(value))
         })
-        freezedMap.set = function () { die(1) }
-        freezedMap.delete = function () { die(1) }
-        freezedMap.clear = function () { die(1) }
-        return freezedMap
+        return immuterMap(freezedMap)
       default:
         return elementToFreeze
     }
@@ -83,7 +91,7 @@ export const si = (() => {
   const cloneObject = (elementToClone) => {
     const proto = Object.getPrototypeOf(elementToClone)
     return pipe(
-      fromEntries,
+      createObjectfromEntries,
       setPrototypeOf(proto)
     )(
       getKeysFromObject(elementToClone)
