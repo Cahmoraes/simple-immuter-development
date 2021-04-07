@@ -27,7 +27,7 @@
 </p>
 
 <h3>produce</h3>
-<p>produce(currentState[, object | array | producer: (draftState) => void]): nextState</p>
+<pre>produce(currentState[, object | array | producer: (draftState) => void]): nextState</pre>
 <ul>
   <li>
     <strong>currentState</strong>: Object | Array
