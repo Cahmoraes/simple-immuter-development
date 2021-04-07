@@ -48,30 +48,55 @@ export const si = (() => {
   }
 
   const isArray = (state) => typeCheck(state) === 'array'
+  
   const isObject = (state) => typeCheck(state) === 'object'
 
+  const isFunction = (state) => typeCheck(state) === 'function'
+  
+  const isUndefined = (state) => typeCheck(state) === 'undefined'
+
+  const areDifferents = (...types) => {
+    let pivo = 0
+    for (let i = pivo + 1; i < types.length; i = pivo + 1) {
+      if (typeCheck(types[pivo]) !== typeCheck(types[i])) {
+        console.log(typeCheck(types[pivo]), typeCheck(types[i]))
+        return true
+      }
+      pivo++
+    }
+    return false
+  }
+
+  // const areDifferents = (typeA, typeB) => 
+  //   typeCheck(typeA) !== typeCheck(typeB)
+
   const everyArray = states => states.every(isArray)
+
   const everyObject = states => states.every(isObject)
 
-  const freeze = (object) => Object.freeze(object)
+  const areAll = (type) => (...objs) => 
+    objs.every(obj => typeCheck(obj) === type)
 
-  const isPrimitive = (elementToCheck) => 
-    elementToCheck !== Object(elementToCheck)
+  const areAllObjects = areAll('object')
+
+  const areAllArrays = areAll('array')
+
+  const freeze = (object) => Object.freeze(object)
 
   const freezeDeep = (elementToFreeze) => {
     switch(typeCheck(elementToFreeze)) {
       case 'object':
-        const proto = Object.getPrototypeOf(elementToFreeze)
+        const prototype = Object.getPrototypeOf(elementToFreeze)
         return pipe(
           createObjectfromEntries,
-          setPrototypeOf(proto),
+          setPrototypeOf(prototype),
           freeze
         )(
           getKeysFromObject(elementToFreeze)
             .map(key => [key, freezeDeep(elementToFreeze[key])])
         )
       case 'array':
-        return Object.freeze(elementToFreeze.map(freezeDeep))
+        return freeze(elementToFreeze.map(freezeDeep))
       case 'set':
         return immuterSet(elementToFreeze)
       case 'map':
@@ -86,29 +111,29 @@ export const si = (() => {
   }
 
   const produce = (baseState, producer, ...states) => {
-    const cloned = cloneDeep(baseState)
-    if (typeCheck(producer) === 'undefined') {
-      return freezeDeep(cloned)
+    const clonedBaseState = cloneDeep(baseState)
+    if (isUndefined(producer)) {
+      return freezeDeep(clonedBaseState)
     }
-    if(typeCheck(producer) === 'function') {
-      producer(cloned)
-      return freezeDeep(cloned)
+    if(isFunction(producer)) {
+      producer(clonedBaseState)
+      return freezeDeep(clonedBaseState)
     }
     if (states.length > 0) {
-      if (typeCheck(baseState) === 'object' && typeCheck(producer) === 'object' && everyObject(states)) {
-        return freezeDeep(Object.assign(cloned, producer, ...states))
+      if (areAllObjects(clonedBaseState, producer, states) && everyObject(states)) {
+        return freezeDeep(Object.assign(clonedBaseState, producer, ...states))
       }
-      if (typeCheck(cloned) === 'array' && typeCheck(producer) === 'array' && everyArray(states)) {
-        return freezeDeep([...cloned, ...producer, ...flat(states)])
+      if (areAllArrays(clonedBaseState, producer, states) && everyArray(states)) {
+        return freezeDeep([...clonedBaseState, ...producer, ...flat(states, 1)])
       }
     }
-    if (typeCheck(baseState) === 'object' && typeCheck(producer) === 'object') {
-      return freezeDeep(Object.assign(cloned, producer))
+    if (areAllObjects(clonedBaseState, producer)) {
+      return freezeDeep(Object.assign(clonedBaseState, producer))
     }
-    if (typeCheck(cloned) === 'array' && typeCheck(producer) === 'array') {
-      return freezeDeep([...cloned, ...producer])
+    if (areAllArrays(clonedBaseState, producer)) {
+      return freezeDeep([...clonedBaseState, ...producer])
     }
-    if (typeCheck(cloned) !== typeCheck(producer)) {
+    if (areDifferents(clonedBaseState, producer)) {
       throw new Error(errors.get(2))
     }
   }
@@ -116,10 +141,10 @@ export const si = (() => {
   const cloneArray = (elementToClone) => elementToClone.map(cloneDeep)
 
   const cloneObject = (elementToClone) => {
-    const proto = Object.getPrototypeOf(elementToClone)
+    const prototype = Object.getPrototypeOf(elementToClone)
     return pipe(
       createObjectfromEntries,
-      setPrototypeOf(proto)
+      setPrototypeOf(prototype)
     )(
       getKeysFromObject(elementToClone)
       .map(key => [key, cloneDeep(elementToClone[key])])
@@ -131,7 +156,7 @@ export const si = (() => {
     elementToClone.forEach((value, key) => {
       clonedMap.set(key, cloneDeep(value))
     })
-    return (clonedMap)
+    return clonedMap
   }
 
   const cloneSet = (elementToClone) => {
@@ -141,7 +166,6 @@ export const si = (() => {
   }
 
   const cloneDeep = (element) => {  
-    if (isPrimitive(element)) return element
     switch (typeCheck(element)) {
       case 'object':
         return cloneObject(element)

@@ -36,16 +36,16 @@ const nextPerson = si.produce(person, draftState => {
   draftState.hobbies.delete('movie')
 })
 
-// nextPerson.hobbies.set('sport', 'footbal')
-// log(nextPerson.hobbies)
+nextPerson.hobbies.set('sport', 'footbal')
+log(nextPerson.hobbies)
 
-// const frutas_1 = ['banana', 'maçã', 'pera']
-// const frutas_2 = ['limão', 'morango']
-// const frutas_3 = ['pêssego']
-// const frutas_4 = ['pêssego', 'mamão']
+const frutas_1 = ['banana', 'maçã', 'pera']
+const frutas_2 = ['limão', 'morango']
+const frutas_3 = ['pêssego']
+const frutas_4 = ['pêssego', 'mamão']
 
-// const nextFrutas = si.produce(frutas_1, frutas_2, frutas_3, frutas_4)
-// log(nextFrutas)
+const nextFrutas = si.produce(frutas_1, frutas_2, frutas_3, frutas_4)
+log(nextFrutas)
 
 const cars_1 = {
   'ferrari': 'vermelho',
@@ -62,5 +62,5 @@ const cars_3 = {
 const cars_4 = {
   'lamborghini': 'amarelo'
 }
-const nextCars = si.produce(cars_1, cars_2, cars_3, cars_4)
-log(nextCars)
+// const nextCars = si.produce(cars_1, cars_2, cars_3, cars_4)
+// log(nextCars)
