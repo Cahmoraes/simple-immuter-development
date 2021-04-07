@@ -30,8 +30,13 @@ const person = {
   }
 }
 
-const nextPeople = si.produce(person)
-log(nextPeople)
+const nextPeople = si.produce(person, draftState => {
+  draftState.hobbies.set('read', 'books')
+  draftState.hobbies.delete('movie')
+})
+
+nextPeople.hobbies.set('sport', 'footbal')
+log(nextPeople.hobbies)
 
 // log(assert.deepEqual(nextPeople, people))
 
