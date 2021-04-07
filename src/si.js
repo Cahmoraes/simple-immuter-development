@@ -10,6 +10,13 @@ export const si = (() => {
 
   const pipe = (...fns) => (value) => 
     fns.reduce((acc, fn) => fn(acc), value)
+
+  const flat = (element, depth = Infinity) => {
+    if (typeCheck(element) !== 'array') return element
+    return depth > 0 ? 
+      element.reduce((flatArray, array) => flatArray.concat(flat(array, --depth)), []) :
+      element
+  }
   
   const createObjectfromEntries = (entries) => Object.fromEntries(entries)
 
@@ -39,6 +46,12 @@ export const si = (() => {
       stringType.indexOf(']')
     ).toLowerCase()
   }
+
+  const isArray = (state) => typeCheck(state) === 'array'
+  const isObject = (state) => typeCheck(state) === 'object'
+
+  const everyArray = states => states.every(isArray)
+  const everyObject = states => states.every(isObject)
 
   const freeze = (object) => Object.freeze(object)
 
@@ -72,7 +85,7 @@ export const si = (() => {
     }
   }
 
-  const produce = (baseState, producer) => {
+  const produce = (baseState, producer, ...states) => {
     const cloned = cloneDeep(baseState)
     if (typeCheck(producer) === 'undefined') {
       return freezeDeep(cloned)
@@ -80,6 +93,14 @@ export const si = (() => {
     if(typeCheck(producer) === 'function') {
       producer(cloned)
       return freezeDeep(cloned)
+    }
+    if (states.length > 0) {
+      if (typeCheck(baseState) === 'object' && typeCheck(producer) === 'object' && everyObject(states)) {
+        return freezeDeep(Object.assign(cloned, producer, ...states))
+      }
+      if (typeCheck(cloned) === 'array' && typeCheck(producer) === 'array' && everyArray(states)) {
+        return freezeDeep([...cloned, ...producer, ...flat(states)])
+      }
     }
     if (typeCheck(baseState) === 'object' && typeCheck(producer) === 'object') {
       return freezeDeep(Object.assign(cloned, producer))
