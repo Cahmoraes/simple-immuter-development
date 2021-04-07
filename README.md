@@ -2,7 +2,7 @@
   <a href="https://github.com/Cahmoraes/simple-immuter/blob/main/src/si.js" target="_blank">Simple Immuter</a>
 </h3>
 
----
+---lonagem profunda de Objeto
 
 ## :rocket: Sobre
   <img style="max-width: 100%;" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/immuter-cycle.png" alt="Simple Observable">
@@ -59,7 +59,7 @@
 
 <h3>Clonagem profunda de Objeto</h3>
 <p>baseState (objeto a ser clonado)</p>
-<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-clone-object.png">
+<img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-clone-object.png">
 <p>nextState: (objeto clonado)</p>
 <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-result-clone-object.png">
 <p>
@@ -69,7 +69,7 @@
 
 <h3>Alterando estrutura Map dentro da função producer</h3>
 <p>O exemplo a seguir demonstra a inserção e remoceção de elementos de dentro da estrutura Map do exemplo anterior</p>
-<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-draft-map-clone-object.png">
+<img width="300" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-draft-map-clone-object.png">
 <p>
   <strong>Resultado:</strong>
   Observe que na imagem acima, a instrução de remoção: <pre>nextPeople.hobbies.set('sport', 'footbal')</pre> diretamente no nextPeople foi executada.
