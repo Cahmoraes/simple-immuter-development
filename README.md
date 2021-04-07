@@ -54,6 +54,18 @@
 </p>
 <img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-2.png">
 
+<h3>Clonagem profunda de Array</h3>
+<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-clone-array.png">
+
+<h3>Clonagem profunda de Objeto</h3>
+<p>baseState (objeto a ser clonado)</p>
+<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-clone-object.png">
+<p>nextState: (objeto clonado)</p>
+<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-result-clone-object.png">
+<p>
+<strong>Observação:</strong> Estruturas de dados como Map e Set, possuem métodos para inserção, limpeza e remoção de elementos. Para garantir a imutabilidade do clone resultante, esses métodos são sobrescritos no processo de imutabilidade, que ocorre logo após o merge entre o baseState com o draftState.<br>
+  Para refletir a remoção, adição ou limpeza dessas estruturas no nextState, é necessário realizá-la dentro da função producer.
+</p>
 ## :computer: Tecnologias utilizadas
 
 - [javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
