@@ -82,10 +82,14 @@
 <h3>Merge de Arrays</h3>
 <p>Se os dois parâmetros de produce forem arrays, o nextState será um array imutável resultante do merge de ambos os arrays</p>
 <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-arrays.png">
+<p>Se o parâmetro states for passado e todos os states forem do tipo Array, o nextState será o resultado do merge de todos os Arrays</p>
+<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-array-states.png">
 
 <h3>Merge de Objetos</h3>
 <p>Se os dois parâmetros de produce forem objetos, o nextState será um objeto imutável resultante do merge de ambos os objetos</p>
 <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-objects.png">
+<p>Se o parâmetro states for passado e todos os states forem do tipo Object, o nextState será o resultado do merge de todos os Objetos</p>
+<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-objects-states.png">
 
 ## :computer: Tecnologias utilizadas
 
