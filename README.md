@@ -66,6 +66,16 @@
 <strong>Observação:</strong> Estruturas de dados como Map e Set, possuem métodos para inserção, limpeza e remoção de elementos. Para garantir a imutabilidade do clone resultante, esses métodos são sobrescritos no processo de imutabilidade, que ocorre logo após o merge entre o baseState com o draftState.<br>
   Para refletir a remoção, adição ou limpeza dessas estruturas no nextState, é necessário realizá-la dentro da função producer.
 </p>
+
+<h3>Alterando estrutura Map dentro da função producer</h3>
+<p>O exemplo a seguir demonstra a inserção e remoceção de elementos de dentro da estrutura Map do exemplo anterior</p>
+<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-draft-map-clone-object.png">
+<p>
+  <strong>Resultado:</strong>
+  Observe que na imagem acima, a instrução de remoção: <pre>nextPeople.hobbies.set('sport', 'footbal')</pre> diretamente no nextPeople foi executada.
+  Entretando, na imagem abaixo, a seta vermelha indica o resultado no terminal, informando que este objeto foi congelado e não deve ser mutado. Ou seja, as mutações devem ocorrer dentro da função producer.
+  <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-result-draft-map-clone-object.png">
+</p>
 ## :computer: Tecnologias utilizadas
 
 - [javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
