@@ -72,8 +72,9 @@
   <strong>Resultado:</strong>
   Observe que na imagem acima, a instrução de remoção: <pre>nextPeople.hobbies.set('sport', 'footbal')</pre> diretamente no nextPeople foi executada.
   Entretando, na imagem abaixo, a seta vermelha indica o resultado no terminal, informando que este objeto foi congelado e não deve ser mutado. Ou seja, as mutações devem ocorrer dentro da função producer.
+</p>
+<p>
   <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-result-draft-map-clone-object.png">
-  <br>
 </p>
 
 ## :computer: Tecnologias utilizadas
