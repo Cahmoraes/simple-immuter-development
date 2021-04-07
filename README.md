@@ -20,7 +20,7 @@
 <h3>Exemplo 1</h3>
 <img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-1.png">
 <h3>Resultado</h3>
-<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/result-1.png">
+<img width="400" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/result-1.png">
 
 <p>
   O baseState não será alterado, mas o nextState será uma nova árvore imutável que reflete todas as alterações feitas no draftState (e compartilhando estruturalmente as coisas que não foram alteradas).
