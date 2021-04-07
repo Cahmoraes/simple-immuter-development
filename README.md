@@ -55,7 +55,7 @@
 <img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-2.png">
 
 <h3>Clonagem profunda de Array</h3>
-<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-clone-array.png">
+<img width="400" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-clone-array.png">
 
 <h3>Clonagem profunda de Objeto</h3>
 <p>baseState (objeto a ser clonado)</p>
