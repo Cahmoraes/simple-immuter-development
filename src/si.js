@@ -1,7 +1,8 @@
 export const si = (() => {
 
   const errors = new Map([
-    [1, "This object has been frozen and should not be mutated"]
+    [1, 'This object has been frozen and should not be mutated'],
+    [2, 'baseState and producer are incompatibles']
   ])
 
   const die = (errorNumber) =>
@@ -76,14 +77,19 @@ export const si = (() => {
     if (typeCheck(producer) === 'undefined') {
       return freezeDeep(cloned)
     }
-    if (typeCheck(producer) === 'object') {
+    if(typeCheck(producer) === 'function') {
+      producer(cloned)
+      return freezeDeep(cloned)
+    }
+    if (typeCheck(baseState) === 'object' && typeCheck(producer) === 'object') {
       return freezeDeep(Object.assign(cloned, producer))
     }
     if (typeCheck(cloned) === 'array' && typeCheck(producer) === 'array') {
       return freezeDeep([...cloned, ...producer])
     }
-    producer(cloned)
-    return freezeDeep(cloned)
+    if (typeCheck(cloned) !== typeCheck(producer)) {
+      throw new Error(errors.get(2))
+    }
   }
 
   const cloneArray = (elementToClone) => elementToClone.map(cloneDeep)

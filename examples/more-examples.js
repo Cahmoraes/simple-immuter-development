@@ -4,6 +4,7 @@ const log = (...args) => console.log(...args)
 
 const nums = [1, 2, 3, [4], [[5],6]]
 const nextNums = si.produce(nums)
+
 // log(nums, nextNums)
 // nums:     [ 1, 2, 3, [ 4 ], [ [ 5 ], 6 ] ] 
 // nextNums: [ 1, 2, 3, [ 4 ], [ [ 5 ], 6 ] ]
@@ -30,13 +31,30 @@ const person = {
   }
 }
 
-const nextPeople = si.produce(person, draftState => {
+const nextPerson = si.produce(person, draftState => {
   draftState.hobbies.set('read', 'books')
   draftState.hobbies.delete('movie')
 })
 
-nextPeople.hobbies.set('sport', 'footbal')
-log(nextPeople.hobbies)
+// nextPerson.hobbies.set('sport', 'footbal')
+// log(nextPerson.hobbies)
 
-// log(assert.deepEqual(nextPeople, people))
+const frutas_1 = ['banana', 'maçã', 'pera']
+const frutas_2 = ['limão', 'morango']
 
+const nextFrutas = si.produce(frutas_1, frutas_2)
+// log(nextFrutas)
+
+const cars_1 = {
+  'ferrari': 'vermelho',
+  'porsche': 'braco'
+}
+const cars_2 = {
+  'masserati': 'azul',
+  'Koenigsegg': 'laranja'
+}
+
+const nextCars = si.produce(cars_1, cars_2)
+cars_1.ferrari = '0000'
+cars_2.Koenigsegg = '99999'
+log(nextCars)
