@@ -76,6 +76,13 @@
 <p>
   <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-result-draft-map-clone-object.png">
 </p>
+<h3>Merge de Arrays</h3>
+<p>Se os dois parâmetros de produce forem arrays, o nextState será um array imutável resultante do merge de ambos os arrays</p>
+<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-arrays.png">
+
+<h3>Merge de Objetos</h3>
+<p>Se os dois parâmetros de produce forem objetos, o nextState será um objeto imutável resultante do merge de ambos os objetos</p>
+<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-objects.png">
 
 ## :computer: Tecnologias utilizadas
 
