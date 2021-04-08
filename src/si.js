@@ -22,8 +22,6 @@ export const si = (() => {
 
   const getKeysFromObject = (object) => Object.keys(object)
 
-  const 
-
   const immuterSet = (setToImmuter) => {
     setToImmuter.add = die(1)
     setToImmuter.delete = die(1)
