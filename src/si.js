@@ -67,9 +67,6 @@ export const si = (() => {
     return false
   }
 
-  // const areDifferents = (typeA, typeB) => 
-  //   typeCheck(typeA) !== typeCheck(typeB)
-
   const everyArray = states => states.every(isArray)
 
   const everyObject = states => states.every(isObject)
