@@ -45,7 +45,7 @@ const frutas_3 = ['pêssego']
 const frutas_4 = ['pêssego', 'mamão']
 
 const nextFrutas = si.produce(frutas_1, frutas_2, frutas_3, frutas_4)
-// log(nextFrutas)
+log(nextFrutas)
 
 const cars_1 = {
   'ferrari': 'vermelho',
@@ -62,24 +62,5 @@ const cars_3 = {
 const cars_4 = {
   'lamborghini': 'amarelo'
 }
-// const nextCars = si.produce(cars_1, cars_2, cars_3, cars_4)
-// log(nextCars)
-
-const typeCheck = (elementToCheck) => {
-  const stringType = Object.prototype.toString.call(elementToCheck)
-  return stringType.substring(
-    stringType.indexOf(' ') + 1,
-    stringType.indexOf(']')
-  ).toLowerCase()
-}
-
-const areDifferents = (...types) => {
-  for (let j = 0, i = j + 1; i < types.length; i = j + 1, j++) {
-    if (typeCheck(types[j]) !== typeCheck(types[i])) {
-      return true
-    }
-  }
-  return false
-}
-
-console.log(areDifferents('name', 3))
+const nextCars = si.produce(cars_1, cars_2, cars_3, cars_4)
+log(nextCars)
