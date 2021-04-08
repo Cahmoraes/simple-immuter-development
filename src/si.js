@@ -39,6 +39,9 @@ export const si = (() => {
   const setPrototypeOf = (prototype) => (object) =>
     Object.setPrototypeOf(object, prototype)
 
+  const getPrototypeOf = (object) =>
+    Object.getPrototypeOf(object)
+
   const typeCheck = (elementToCheck) => {
     const stringType = Object.prototype.toString.call(elementToCheck)
     return stringType.substring(
@@ -56,13 +59,10 @@ export const si = (() => {
   const isUndefined = (state) => typeCheck(state) === 'undefined'
 
   const areDifferents = (...types) => {
-    let pivo = 0
-    for (let i = pivo + 1; i < types.length; i = pivo + 1) {
-      if (typeCheck(types[pivo]) !== typeCheck(types[i])) {
-        console.log(typeCheck(types[pivo]), typeCheck(types[i]))
+    for (let j = 0, i = j + 1; i < types.length; i = j + 1, j++) {
+      if (typeCheck(types[j]) !== typeCheck(types[i])) {
         return true
       }
-      pivo++
     }
     return false
   }
@@ -86,10 +86,9 @@ export const si = (() => {
   const freezeDeep = (elementToFreeze) => {
     switch(typeCheck(elementToFreeze)) {
       case 'object':
-        const prototype = Object.getPrototypeOf(elementToFreeze)
         return pipe(
           createObjectfromEntries,
-          setPrototypeOf(prototype),
+          setPrototypeOf(getPrototypeOf(elementToFreeze)),
           freeze
         )(
           getKeysFromObject(elementToFreeze)
