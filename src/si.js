@@ -5,7 +5,7 @@ export const si = (() => {
     [2, 'baseState and producer are incompatibles']
   ])
 
-  const die = (errorNumber) =>
+  const die = (errorNumber) => () =>
     console.log(errors.get(errorNumber))
 
   const pipe = (...fns) => (value) => 
@@ -22,17 +22,19 @@ export const si = (() => {
 
   const getKeysFromObject = (object) => Object.keys(object)
 
+  const 
+
   const immuterSet = (setToImmuter) => {
-    setToImmuter.add = function () { die(1) }
-    setToImmuter.delete = function () { die(1) }
-    setToImmuter.clear = function () { die(1) }
+    setToImmuter.add = die(1)
+    setToImmuter.delete = die(1)
+    setToImmuter.clear = die(1)
     return setToImmuter
   }
 
   const immuterMap = (mapToImmuter) => {
-    mapToImmuter.set = function () { die(1) }
-    mapToImmuter.delete = function () { die(1) }
-    mapToImmuter.clear = function () { die(1) }
+    mapToImmuter.set = die(1)
+    mapToImmuter.delete = die(1)
+    mapToImmuter.clear = die(1)
     return mapToImmuter
   }
 
