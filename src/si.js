@@ -2,7 +2,8 @@ export const si = (() => {
 
   const errors = new Map([
     [1, 'This object has been frozen and should not be mutated'],
-    [2, 'baseState and producer are incompatibles']
+    [2, 'baseState and producer are incompatibles'],
+    [3, `Cannot merge these types`]
   ])
 
   const die = (errorNumber) => () =>
@@ -55,6 +56,8 @@ export const si = (() => {
   const isObject = (state) => typeCheck(state) === 'object'
 
   const isFunction = (state) => typeCheck(state) === 'function'
+
+  const isPromise = (state) => typeCheck(state) === 'promise'
   
   const isUndefined = (state) => typeCheck(state) === 'undefined'
 
@@ -67,16 +70,16 @@ export const si = (() => {
     return false
   }
 
-  const everyArray = states => states.every(isArray)
+  const arrayEveryArray = states => states.every(isArray)
 
-  const everyObject = states => states.every(isObject)
+  const arrayEveryObject = states => states.every(isObject)
 
-  const areAll = (type) => (...objs) => 
+  const areAllSameType = (type) => (...objs) => 
     objs.every(obj => typeCheck(obj) === type)
 
-  const areAllObjects = areAll('object')
+  const areAllObjects = areAllSameType('object')
 
-  const areAllArrays = areAll('array')
+  const areAllArrays = areAllSameType('array')
 
   const freeze = (object) => Object.freeze(object)
 
@@ -106,7 +109,27 @@ export const si = (() => {
     }
   }
 
+  const producePromise = async (baseState, producer) => {
+    try {
+      const resolvedState = await baseState
+      if (isUndefined(producer)) {
+        return freezeDeep(resolvedState)
+      }
+
+      if(isFunction(producer)) {
+        producer(resolvedState)
+        return freezeDeep(resolvedState)
+      }
+
+    } catch (error) {
+      return error.message
+    }
+  }
+
   const produce = (baseState, producer, ...states) => {
+    if (isPromise(baseState)) {
+      return producePromise(baseState, producer)
+    }
     const clonedBaseState = cloneDeep(baseState)
     if (isUndefined(producer)) {
       return freezeDeep(clonedBaseState)
@@ -116,11 +139,19 @@ export const si = (() => {
       return freezeDeep(clonedBaseState)
     }
     if (states.length > 0) {
-      if (areAllObjects(clonedBaseState, producer, states) && everyObject(states)) {
-        return freezeDeep(Object.assign(clonedBaseState, producer, ...states))
+      if (areAllObjects(clonedBaseState, producer) && arrayEveryObject(states)) {
+        try {
+          return freezeDeep(Object.assign(clonedBaseState, producer, ...states))
+        } catch {
+          throw new Error(errors.get(2))
+        }
       }
-      if (areAllArrays(clonedBaseState, producer, states) && everyArray(states)) {
-        return freezeDeep([...clonedBaseState, ...producer, ...flat(states, 1)])
+      if (areAllArrays(clonedBaseState, producer) && arrayEveryArray(states)) {
+        try {
+          return freezeDeep([...clonedBaseState, ...producer, ...flat(states, 1)])
+        } catch {
+          throw new Error(errors.get(2))
+        }
       }
     }
     if (areAllObjects(clonedBaseState, producer)) {
@@ -131,6 +162,9 @@ export const si = (() => {
     }
     if (areDifferents(clonedBaseState, producer)) {
       throw new Error(errors.get(2))
+    }
+    else {
+      throw new Error(errors.get(3))
     }
   }
 

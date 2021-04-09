@@ -1,4 +1,3 @@
-import { strict as assert } from 'assert'
 import { si } from '../src/si.js'
 const log = (...args) => console.log(...args)
 
