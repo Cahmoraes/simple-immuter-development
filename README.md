@@ -91,6 +91,9 @@
 <p>Se o parâmetro states for passado e todos os states forem do tipo Object, o nextState será o resultado do merge de todos os Objetos</p>
 <img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-objects-states.png">
 
+<h3>Compatibilidade com Promises</h3>
+<img width="400" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/promise-example.png">
+
 ## :computer: Tecnologias utilizadas
 
 - [javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
