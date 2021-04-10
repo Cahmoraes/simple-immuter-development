@@ -92,7 +92,7 @@
 <img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-objects-states.png">
 
 <h3>Compatibilidade com Promises</h3>
-<img width="400" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/promise-example.png">
+<img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/promise-example.png">
 
 ## :computer: Tecnologias utilizadas
 
