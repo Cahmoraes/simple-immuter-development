@@ -83,6 +83,23 @@ export const si = (() => {
 
   const freeze = (object) => Object.freeze(object)
 
+  const mergeAllObjectsOrArrays = (clonedBaseState, producer, states) => {
+    if (areAllObjects(clonedBaseState, producer) && arrayEveryObject(states)) {
+      try {
+        return freezeDeep(Object.assign(clonedBaseState, producer, ...states))
+      } catch {
+        throw new Error(errors.get(2))
+      }
+    }
+    if (areAllArrays(clonedBaseState, producer) && arrayEveryArray(states)) {
+      try {
+        return freezeDeep([...clonedBaseState, ...producer, ...flat(states, 1)])
+      } catch {
+        throw new Error(errors.get(2))
+      }
+    }
+  }
+
   const freezeDeep = (elementToFreeze) => {
     switch(typeCheck(elementToFreeze)) {
       case 'object':
@@ -139,20 +156,7 @@ export const si = (() => {
       return freezeDeep(clonedBaseState)
     }
     if (states.length > 0) {
-      if (areAllObjects(clonedBaseState, producer) && arrayEveryObject(states)) {
-        try {
-          return freezeDeep(Object.assign(clonedBaseState, producer, ...states))
-        } catch {
-          throw new Error(errors.get(2))
-        }
-      }
-      if (areAllArrays(clonedBaseState, producer) && arrayEveryArray(states)) {
-        try {
-          return freezeDeep([...clonedBaseState, ...producer, ...flat(states, 1)])
-        } catch {
-          throw new Error(errors.get(2))
-        }
-      }
+      return mergeAllObjectsOrArrays(clonedBaseState, producer, states)
     }
     if (areAllObjects(clonedBaseState, producer)) {
       return freezeDeep(Object.assign(clonedBaseState, producer))

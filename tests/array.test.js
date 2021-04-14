@@ -19,11 +19,17 @@ const people2 = [
   { id: 3, name: 'Jhon' },
   { id: 4, name: 'Ana' }
 ]
+{
+  const nextState = si.produce(
+    people2, 
+    [{ id: 5, name: 'thomas' }, { id:6, name: 'caique' }, { id: 7, name: 'isabella' }]
+  )
+  log(nextState)
+}
+{
+  const fruits = ['maça', 'banana']
+  const nextState = si.produce(fruits, ['pêra'])
 
-const nextState2 = si.produce(people2, draftState => {
-  draftState.forEach((person, index) => {
-    draftState[index] = {...person, name: person.name.toLowerCase()}
-  })
-})
+  log(nextState)
+}
 
-log(nextState2)
