@@ -21,10 +21,7 @@ export const si = (() => {
   
   const createObjectfromEntries = (entries) => Object.fromEntries(entries)
 
-  const getKeysAndSymbolsFromObject = (object) => {
-    const symbols = Object.getOwnPropertySymbols(object)
-    return symbols.concat(Object.keys(object))
-  }
+  const getKeysAndSymbolsFromObject = (object) => Reflect.ownKeys(object)
 
   const immuterSet = (setToImmuter) => {
     setToImmuter.add = die(1)

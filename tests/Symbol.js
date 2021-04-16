@@ -15,6 +15,8 @@ const obj = {
   }
 }
 
-const nextState = si.produce(obj)
+const nextState = si.produce(obj, draftState => {
+  draftState[nameSymbol] = 'thomas'
+})
 log([...nextState]) // [ 'John', 30 ]
 log(Number(nextState)) // 30
