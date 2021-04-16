@@ -94,7 +94,9 @@
 <h3>Compatibilidade com Promises</h3>
 <img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/promise-example.png">
 
-
+<h3>Compatibilidade com tipo Symbol</h3>
+<p>A função produce é capaz de copiar as propriedades Symbol do objeto baseState para o nextState.</p>
+<img src="400" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/symbol-example.png">
 
 ## :computer: Tecnologias utilizadas
 
