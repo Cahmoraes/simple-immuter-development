@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from 'assert'
+import { deepStrictEqual } from 'assert'
 import { si } from '../src/si.js'
 
 const log = (...args) => console.log(...args)
@@ -14,7 +14,7 @@ const user = {
 ;(async() => {
   {
     const promise = Promise.resolve(user)
-    const nextState = await si.produce(promise,   draftState => {
+    const nextState = await si.produce(promise, draftState => {
       delete draftState.age
       draftState.hobbies.set('book', 'science')
     })
