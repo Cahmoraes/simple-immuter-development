@@ -21,7 +21,10 @@ export const si = (() => {
   
   const createObjectfromEntries = (entries) => Object.fromEntries(entries)
 
-  const getKeysFromObject = (object) => Object.keys(object)
+  const getKeysAndSymbolsFromObject = (object) => {
+    const symbols = Object.getOwnPropertySymbols(object)
+    return symbols.concat(Object.keys(object))
+  }
 
   const immuterSet = (setToImmuter) => {
     setToImmuter.add = die(1)
@@ -108,7 +111,7 @@ export const si = (() => {
           setPrototypeOf(getPrototypeOf(elementToFreeze)),
           freeze
         )(
-          getKeysFromObject(elementToFreeze)
+          getKeysAndSymbolsFromObject(elementToFreeze)
             .map(key => [key, freezeDeep(elementToFreeze[key])])
         )
       case 'array':
@@ -180,7 +183,7 @@ export const si = (() => {
       createObjectfromEntries,
       setPrototypeOf(prototype)
     )(
-      getKeysFromObject(elementToClone)
+      getKeysAndSymbolsFromObject(elementToClone)
       .map(key => [key, cloneDeep(elementToClone[key])])
     )
   }
@@ -199,7 +202,7 @@ export const si = (() => {
     return clonedSet
   }
 
-  const cloneDeep = (element) => {  
+  const cloneDeep = (element) => { 
     switch (typeCheck(element)) {
       case 'object':
         return cloneObject(element)
