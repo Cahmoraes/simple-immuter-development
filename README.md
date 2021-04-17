@@ -27,16 +27,30 @@
 </p>
 
 <h3>produce</h3>
-<pre>produce(currentState[, object | array | producer: (draftState) => void][, ...states: object[] | array[]): nextState</pre>
+<pre>produce(baseState: Object | Array | Map | Set | Promise | [, producer: (draftState) => void][, ...states: object[] | array[]): nextState</pre>
 <ul>
   <li>
-    <strong>currentState</strong>: Object | Array
+    <strong>baseState</strong>: Object | Array | Map | Set | Promise
   </li>
   <li>
-    <strong>object</strong>: (opcional) Se for passado um objeto, currentState deverá ser um objeto. O nextState será o resultado do merge entre currentState e object. 
-  </li>
-  <li>
-    <strong>array</strong>: (opcional) Se for passado um array, currentState deverá ser um array. O nextState será o resultado do merge entre currentState e array. 
+    <strong>producer</strong>
+    <ul>
+      <li>
+        <strong>Object</strong>: (opcional) Se baseState for um objeto, draftState deverá ser um objeto. O nextState será o resultado do merge entre draftState e baseState. 
+      </li>
+      <li>
+        <strong>Array</strong>: (opcional) Se baseState for passado array, draftState deverá ser um array. O nextState será o resultado do merge entre draftState e baseState. 
+      </li>
+      <li>
+        <strong>Map</strong>: (opcional) Se baseState for um Map, draftState deverá ser um Map. O nextState será o resultado do merge entre draftState e baseState. 
+      </li>
+      <li>
+        <strong>Set</strong>: (opcional) Se baseState for um Set, draftState deverá ser um Set. O nextState será o resultado do merge entre draftState e baseState. 
+      </li>
+       <li>
+        <strong>Promise</strong>: (opcional) Se baseState for uma Promise, draftState deverá ser do mesmo tipo da Promise. O nextState será uma Promise do resultado do merge entre draftState e baseState. 
+      </li>
+    </ul>
   </li>
   <li>
     <strong>producer</strong>: (opcional) Se for passado uma função, currentState pode ser um objeto ou um array. O draftState é um clone do currentState onde será alterado dentro da função producer. O nextState será o resultado do draftState em cima do currentState.
