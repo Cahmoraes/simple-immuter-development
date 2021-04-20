@@ -6,7 +6,7 @@ const si = require('../../src/si')
 const peopleMock = require('../mock/people.json')
 const typeCheck = require('../utils/typeCheck')
 
-describe('Simple Immuter', () => {
+describe('Simple Immuter - Array', () => {
 
   describe('si.produce(array)', () => {
 
@@ -28,7 +28,7 @@ describe('Simple Immuter', () => {
         assert.deepStrictEqual(nextState, people)
       })
 
-      it('shloud a deep clone array with same properties and structure', () => {
+      it('should make a deep clone to array with same properties and structure', () => {
         const depthArray = [1, [2, [3, [4], 5], 6], 7, [[[[[8]]]]]]
         const nextState = si.produce(depthArray)
         assert.deepStrictEqual(nextState, depthArray)
@@ -85,11 +85,13 @@ describe('Simple Immuter', () => {
   
       it('should return properties in new memory address', () => {
         const nextState = si.produce(peopleMock, () => {})
-        assert.ok(nextState[0].addrres !== peopleMock[0].address)
+        assert.ok(Reflect.has(nextState[0], 'address'))
+        assert.ok(nextState[0].address !== peopleMock[0].address)
       })
   
       it('should return the same properties content', () => {
         const nextState = si.produce(peopleMock, () => {})
+        assert.ok(Reflect.has(nextState[0], 'address'))
         assert.deepStrictEqual(nextState[0].address, peopleMock[0].address)
       })
       
@@ -99,11 +101,10 @@ describe('Simple Immuter', () => {
       })
   
       it('should not change baseState', () => {
-        const copyBaseState = peopleMock
+        const copyBaseState = [...peopleMock]
         si.produce(peopleMock, draftState => {
           draftState.unshift()
         })
-        log(peopleMock)
         assert.deepStrictEqual(copyBaseState, peopleMock)
       })
   
@@ -123,7 +124,7 @@ describe('Simple Immuter', () => {
       const people = ['caique', 'thomas', 'isabella', 'igor']
       const newPerson = ['bolt']
       const nextState = si.produce(people, newPerson)
-      assert.notDeepStrictEqual(nextState, people)
+      assert.notStrictEqual(nextState, people)
     })
 
     it('should merge 2 or more arrays', () => {
