@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "type": "module",
+  "scripts": {
+    "test": "mocha -w --parallel ./test/**/*.test.js"
+  },
   "devDependencies": {
-    "faker": "^5.5.3"
-  }
+    "faker": "^5.5.3",
+    "mocha": "8"
+  },
+  "repository": "https://github.com/Cahmoraes/simple-immuter.git",
+  "author": "Cahmoraes <ike.moraes93@gmail.com>"
 }

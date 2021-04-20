@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "age": 28,
+    "Job": "Programmer",
+    "address": {
+      "city": "Osasco",
+      "state": "SP"
+    },
+    "hobbies": [
+      "books",
+      "music"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Alice Winters",
+    "age": 29,
+    "Job": "Arquiteto",
+    "address": {
+      "city": "Búzios",
+      "state": "RJ"
+    },
+    "hobbies": [
+      "cook",
+      "bike"
+    ]
+  }
+]

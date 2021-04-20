@@ -1,4 +1,4 @@
-export const si = (() => {
+const si = (() => {
 
   const errors = new Map([
     [1, 'This object has been frozen and should not be mutated'],
@@ -44,7 +44,7 @@ export const si = (() => {
     Object.getPrototypeOf(object)
 
   const typeCheck = (elementToCheck) => {
-    const stringType = Object.prototype.toString.call(elementToCheck)
+    const stringType = Reflect.apply(Object.prototype.toString, elementToCheck, [])
     return stringType.substring(
       stringType.indexOf(' ') + 1,
       stringType.indexOf(']')
@@ -218,3 +218,6 @@ export const si = (() => {
     produce
   })
 })()
+
+
+module.exports = si
