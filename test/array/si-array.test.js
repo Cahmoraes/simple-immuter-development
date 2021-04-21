@@ -135,6 +135,12 @@ describe('Simple Immuter - Array', () => {
       assert.deepStrictEqual(nextState, [...people, ...bolt, ...andrea])
     })
 
+    it('should throw error if second parameter to be different of baseState', () => {
+      const people = ['caique', 'thomas', 'isabella', 'igor']
+      const error = new Error('baseState and producer are incompatibles')
+      assert.throws(() => si.produce(people, {}), error)
+    })
+
     it('should return undefined if second parameter to be different of baseState', () => {
       const people = ['caique', 'thomas', 'isabella', 'igor']
       const andrea = ['andrea']

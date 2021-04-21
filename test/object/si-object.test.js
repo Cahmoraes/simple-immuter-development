@@ -1,5 +1,4 @@
 const assert = require('assert')
-const { log } = require('console')
 const { it, describe } = require('mocha')
 const si = require('../../src/si')
 const peopleMock = require('../mock/people.json')
@@ -124,5 +123,45 @@ describe('Simple Immuter - Object', () => {
       const nextState = si.produce(person, vehicles)
       assert.notStrictEqual(nextState, person)
     })
+
+    it('should merge 2 or more objects', () => {
+      const vehicles = { vehicles: ['car', 'motocyle'] }
+      const bolt = { pet: 'Bolt' }
+      const nextState = si.produce(person, vehicles, bolt)
+      assert.deepStrictEqual(nextState, {...person, ...vehicles, ...bolt})
+    })
+
+    it('should throw error if second parameter to be different of baseState', () => {
+      const people = ['caique', 'thomas', 'isabella', 'igor']
+      const error = new Error('baseState and producer are incompatibles')
+      assert.throws(() => si.produce(person, people), error)
+    })
+
+    it('should return undefined if any parameter to be different of baseState', () => {
+      const person = { name: 'caique' }
+      const age = { age: 28 }
+      const hobbies = ['books', 'music']
+      const nextState = si.produce(person, age, hobbies, 'non-object')
+      assert.ok(nextState === undefined)
+    })
+
+    it('should maintain the legacy prototype', () => {
+      class Human {
+        constructor (sex) {
+          this.sex = sex
+        }
+      }
+
+      class Person extends Human {
+        constructor (name, age, sex) {
+          super(sex)
+          Object.assign(this, { name, age })
+        }
+      }
+
+      const nextState = si.produce(new Person('caique', 27, 'M'))
+      assert.ok(nextState instanceof Person && nextState instanceof Human)
+    })
+
   })
 })
