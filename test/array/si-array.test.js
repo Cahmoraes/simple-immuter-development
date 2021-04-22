@@ -1,7 +1,7 @@
 const assert = require('assert')
 const { log } = require('console')
 const { describe, it } = require('mocha')
-const si = require('../../src/build/si')
+const si = require('../../src/build/index')
 
 const peopleMock = require('../mock/people.json')
 const typeCheck = require('../utils/typeCheck')
