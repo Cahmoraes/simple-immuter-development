@@ -1,7 +1,7 @@
 {
   "name": "simple-immuter",
   "version": "1.0.0",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
   "license": "ISC",
   "keywords": [
     "brasil",
@@ -10,8 +10,8 @@
   ],
   "description": "Pacote para trabalhar com imutabilidade e clonagem profunda de estruturas de dados",
   "scripts": {
-    "test": "mocha -w --parallel ./test/**/*.test.js",
-    "build:prod": "cross-env NODE_ENV=production npx babel ./src/index.js --out-dir ./src/build/ --no-comments"
+    "test": "mocha -w --parallel ./src/test/**/*.test.js",
+    "build:prod": "cross-env NODE_ENV=production npx babel ./src/index.js --out-dir ./src/dist/ --no-comments"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.16",

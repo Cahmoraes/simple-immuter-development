@@ -1,6 +1,6 @@
 const assert = require('assert')
 const { it, describe } = require('mocha')
-const si = require('../../src/build/index')
+const si = require('../../../dist/index')
 const peopleMock = require('../mock/people.json')
 const typeCheck = require('../utils/typeCheck')
 
