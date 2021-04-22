@@ -2,7 +2,7 @@
   "name": "simple-immuter",
   "version": "1.0.0",
   "main": "./src/index.js",
-  "license": "MIT",
+  "license": "ISC",
   "keywords": [
     "brasil",
     "programação funcional",
