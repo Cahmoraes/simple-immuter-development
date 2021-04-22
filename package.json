@@ -1,5 +1,5 @@
 {
-  "name": "si",
+  "name": "simple-immuter",
   "version": "1.0.0",
   "main": "./src/build/index.js",
   "license": "MIT",
