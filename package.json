@@ -19,7 +19,7 @@
     "babel-preset-minify": "^0.5.1",
     "mocha": "8"
   },
-  "repository": "https://github.com/Cahmoraes/simple-immuter.git",
+  "repository": "https://github.com/Cahmoraes/simple-immuter-development.git",
   "author": "Cahmoraes <ike.moraes93@gmail.com>",
   "dependencies": {}
 }
