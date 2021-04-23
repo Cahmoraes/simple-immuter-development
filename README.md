@@ -1,9 +1,9 @@
 <h3 align="center">
-  <a href="https://github.com/Cahmoraes/simple-immuter/blob/main/src/si.js" target="_blank">Simple Immuter</a>
+  <a href="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/si.js" target="_blank">Simple Immuter</a>
 </h3>
 
 ## :rocket: Sobre
-  <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/immuter-cycle.png" alt="Simple Observable">
+  <img src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/immuter-cycle.png" alt="Simple Observable">
   <p align="center">by: Immer</p>
 
 ## Descrição
@@ -18,9 +18,9 @@
   A ideia básica é que você aplicará todas as suas alterações a um draftState temporário, que é uma cópia profunda do currentState. Assim que todas as suas mutações forem concluídas, o Simple Immuter produzirá o nextState com base nas mutações do draftState em cima do currentState. Isso significa que você pode interagir com os seus dados simplesmente modificando-os e mantendo todos os benefícios dos dados imutáveis, isto é, o nextState será um cópia profunda e imutável do currentState.
 </p>
 <h3>Exemplo 1</h3>
-<img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-1.png">
+<img width="500" src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/example-1.png">
 <h3>Resultado</h3>
-<img width="400" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/result-1.png">
+<img width="400" src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/result-1.png">
 
 <p>
   O baseState não será alterado, mas o nextState será uma nova árvore imutável que reflete todas as alterações feitas no draftState (e compartilhando estruturalmente as coisas que não foram alteradas).
@@ -67,16 +67,16 @@
 <p>
   Utilizando objetos criados a partir de classes e funções construtoras, os prototipos são herdados para os objetos criados a partir do produce.
 </p>
-<img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-2.png">
+<img width="500" src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/example-2.png">
 
 <h3>Clonagem profunda de Array</h3>
-<img width="400" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-clone-array.png">
+<img width="400" src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/example-clone-array.png">
 
 <h3>Clonagem profunda de Objeto</h3>
 <p>baseState (objeto a ser clonado)</p>
-<img width="400" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-clone-object.png">
+<img width="400" src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/example-clone-object.png">
 <p>nextState: (objeto clonado)</p>
-<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-result-clone-object.png">
+<img src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/example-result-clone-object.png">
 <p>
 <strong>Observação:</strong> Estruturas de dados como Map e Set, possuem métodos para inserção, limpeza e remoção de elementos. Para garantir a imutabilidade do clone resultante, esses métodos são sobrescritos no processo de imutabilidade, que ocorre logo após o merge entre o baseState com o draftState.<br>
   Para refletir a remoção, adição ou limpeza dessas estruturas no nextState, é necessário realizá-la dentro da função producer.
@@ -84,33 +84,33 @@
 
 <h3>Alterando estrutura Map dentro da função producer</h3>
 <p>O exemplo a seguir demonstra a inserção e remoceção de elementos de dentro da estrutura Map do exemplo anterior</p>
-<img width="400" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-draft-map-clone-object.png">
+<img width="400" src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/example-draft-map-clone-object.png">
 <p>
   <strong>Resultado:</strong>
   Observe que na imagem acima, a instrução de remoção: <pre>nextPeople.hobbies.set('sport', 'footbal')</pre> diretamente no nextPeople foi executada.
   Entretando, na imagem abaixo, a seta vermelha indica o resultado no terminal, informando que este objeto foi congelado e não deve ser mutado. Ou seja, as mutações devem ocorrer dentro da função producer.
 </p>
 <p>
-  <img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/example-result-draft-map-clone-object.png">
+  <img src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/example-result-draft-map-clone-object.png">
 </p>
 <h3>Merge de Arrays</h3>
 <p>Se os dois parâmetros de produce forem arrays, o nextState será um array imutável resultante do merge de ambos os arrays</p>
-<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-arrays.png">
+<img src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/merge-arrays.png">
 <p>Se o parâmetro states for passado e todos os states forem do tipo Array, o nextState será o resultado do merge de todos os Arrays</p>
-<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-array-states.png">
+<img src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/merge-array-states.png">
 
 <h3>Merge de Objetos</h3>
 <p>Se os dois parâmetros de produce forem objetos, o nextState será um objeto imutável resultante do merge de ambos os objetos</p>
-<img src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-objects.png">
+<img src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/merge-objects.png">
 <p>Se o parâmetro states for passado e todos os states forem do tipo Object, o nextState será o resultado do merge de todos os Objetos</p>
-<img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/merge-objects-states.png">
+<img width="500" src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/merge-objects-states.png">
 
 <h3>Compatibilidade com Promises</h3>
-<img width="500" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/promise-example.png">
+<img width="500" src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/promise-example.png">
 
 <h3>Compatibilidade com tipo Symbol</h3>
 <p>A função produce é capaz de copiar as propriedades Symbol do objeto baseState para o nextState.</p>
-<img width="400" src="https://github.com/Cahmoraes/simple-immuter/blob/main/src/assets/images/symbol-example.png">
+<img width="400" src="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/assets/images/symbol-example.png">
 
 ## :computer: Tecnologias utilizadas
 
