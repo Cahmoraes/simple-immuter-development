@@ -1,5 +1,5 @@
 <h3 align="center">
-  <a href="https://github.com/Cahmoraes/simple-immuter-development/blob/main/src/si.js" target="_blank">Simple Immuter</a>
+  <a href="https://raw.githubusercontent.com/Cahmoraes/simple-immuter-development/main/dist/index.js" target="_blank">Simple Immuter</a>
 </h3>
 
 ## :rocket: Sobre
